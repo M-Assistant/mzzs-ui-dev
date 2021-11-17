@@ -1,0 +1,37 @@
+.mzzs-image {
+    --image-width: inherit;
+    --image-height: inherit;
+    --image-border-radius: inherit;
+    --image-placeholder-text-color: #ffffff;
+    --image-placeholder-background-color: rgba(0, 0, 0, 0.3);
+    --image-error-text-color: #ffffff;
+    --image-error-background-color: rgba(0, 0, 0, 0.3);
+}
+
+.mzzs-image {
+    display: inline-block;
+    width: var(--image-width);
+    height: var(--image-height);
+    border-radius: var(--image-border-radius);
+    overflow: hidden;
+    img {
+        display: block;
+        width: inherit;
+        height: inherit;
+    }
+    &--placeholder, &--error {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: inherit;
+        height: inherit;
+    }
+    &--placeholder {
+        color: var(--image-placeholder-text-color);
+        background-color: var(--image-placeholder-background-color);
+    }
+    &--error {
+        color: var(--image-error-text-color);
+        background-color: var(--image-error-background-color);
+    }
+}

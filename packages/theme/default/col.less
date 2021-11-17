@@ -1,0 +1,43 @@
+.mzzs-col {
+    box-sizing: border-box;
+    min-height: 1px;
+    &--align {
+        &-start {
+            align-self: flex-start;
+        }
+        &-center {
+            align-self: center;
+        }
+        &-end {
+            align-self: flex-end;
+        }
+        &-baseline {
+            align-self: baseline;
+        }
+        &-stretch {
+            align-self: stretch;
+        }
+    }
+    &--text-align {
+        &-left {
+            text-align: left;
+        }
+        &-center {
+            text-align: center;
+        }
+        &-right {
+            text-align: right;
+        }
+    }
+}
+
+.col(@n, @i: 1) when (@i =< @n) {
+    .mzzs-col--@{i} {
+        width: (@i * 100% / @n);
+    }
+    .mzzs-col--offset-@{i} {
+        margin-left: (@i * 100% / @n);
+    }
+    .col(@n, (@i + 1));
+}
+.col(24);
