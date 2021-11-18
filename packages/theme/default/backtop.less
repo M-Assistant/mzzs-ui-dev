@@ -1,0 +1,27 @@
+.mzzs-backtop {
+    --backtop-width: 40px;
+    --backtop-height: 40px;
+    --backtop-font-color: var(--mzzs-primary-color);
+    --backtop-font-size: var(--mzzs-font-size-lg);
+    --backtop-background-color: var(--mzzs-white-color);
+    --backtop-border-radius: 100%;
+    --backtop-z-index: var(--mzzs-z-index);
+    --backtop-box-shadow: var(--mzzs-box-shadow);
+}
+
+.mzzs-backtop {
+    position: fixed;
+    z-index: var(--backtop-z-index);
+    background-color: var(--backtop-background-color);
+    width: var(--backtop-width);
+    height: var(--backtop-width);
+    font-size: var(--backtop-font-size);
+    color: var(--backtop-font-color);
+    border-radius: var(--backtop-border-radius);
+    box-shadow: var(--backtop-box-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+

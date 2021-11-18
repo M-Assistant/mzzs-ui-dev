@@ -4,6 +4,13 @@ declare interface ObserverCallabck {
     (entry: IntersectionObserverEntry, observer: MsIntersectionObserver): void
 }
 
+declare type ComponentClass = string | string[] | Record<string, boolean> | undefined
+declare type ComponentStyle = Record<string, any>
+declare type FormatFunction<T, R> = (val: any, extra?: T) => R
+
+declare type smoothCallback = (val:{ to: number, done: boolean }) => void
+
+
 export interface KeyValue {
     [key: string]: string | number | undefined
 }
@@ -21,22 +28,21 @@ export type RowAlignItems = PropType<'start' | 'center' | 'end' | 'baseline' | '
 export type RowAlignContent = PropType<'start' | 'center' | 'end' | 'between' | 'around' | 'stretch'>
 export interface RowProps {
     gutter?: number | string
-    direction?: string
-    wrap?: string
-    justify?: string
-    alignItems?: string
-    alignContent?: string
+    direction?: RowDirection
+    wrap?: RowWrap
+    justify?: RowJustify
+    alignItems?: RowAlignItems
+    alignContent?: RowAlignContent
     tag: string
 }
 // ------------------------------------- row component ------------------------------
 
 
 
-
 // ------------------------------------- col component ------------------------------
-export type ColAlign = PropType<'start' | 'center' | 'end' | 'baseline' | 'stretch'>
-export type ColTextAlign = PropType<'left' | 'center' | 'right'>
-export interface ColProps {
+declare type ColAlign = PropType<'start' | 'center' | 'end' | 'baseline' | 'stretch'>
+declare type ColTextAlign = PropType<'left' | 'center' | 'right'>
+declare interface ColProps {
     span?: number | string
     offset?: number | string
     order?: number | string
@@ -51,11 +57,9 @@ export interface ColProps {
 
 
 
-
-
 // ------------------------------------- image component ------------------------------
-export type ImageFit = PropType<'contain' | 'cover' | 'fill' | 'none' | 'scale-down'>
-export interface ImageProps {
+declare type ImageFit = PropType<'contain' | 'cover' | 'fill' | 'none' | 'scale-down'>
+declare interface ImageProps {
     src: string
     alt?: string
     title?: string
@@ -66,6 +70,72 @@ export interface ImageProps {
     radius?: number | string
 }
 // ------------------------------------- image component ------------------------------
+
+
+
+// ------------------------------------- avatar component ------------------------------
+declare type AvatarSize = PropType<number | string | 'large' | 'medium' | 'small'>
+declare interface AvatarProps {
+    src: string
+    alt?: string
+    title?: string
+    fit?: ImageFit
+    size?: AvatarSize
+    radius?: number | string
+    tag: string
+}
+// ------------------------------------- avatar component ------------------------------
+
+
+
+// ------------------------------------- overlay component ------------------------------
+declare type OverlaypPosition = PropType<'relative' | 'absolute' | 'fixed'>
+declare interface OverlayProps {
+    show: boolean
+    lockScroll: boolean
+    position?: OverlaypPosition
+    zIndex?: number | string
+    className: ComponentClass
+    customStyle?: ComponentStyle
+}
+// ------------------------------------- overlay component ------------------------------
+
+
+
+// ------------------------------------- icon component ------------------------------
+export interface IconProps {
+    name: string
+    classPrefix: string
+    color?: string
+    size?: number | string
+    rotate?: number
+    tag: string
+}
+// ------------------------------------- icon component ------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -95,16 +165,7 @@ export interface Scroll {
 
 
 
-// ------------------------------------- overlay component ------------------------------
-export interface OverlayProps {
-    show: boolean
-    zIndex?: number
-    duration: number
-    lockScroll: boolean
-    className?: string | string[] | KeyValue
-    customStyle?: KeyValue
-}
-// ------------------------------------- overlay component ------------------------------
+
 
 
 
@@ -220,14 +281,7 @@ export interface SliderProps {
 
 
 
-export interface IconProps {
-    name: string
-    classPrefix: string
-    color?: string
-    size?: number | string
-    rotate?: number
-    tag: string
-}
+
 
 export interface InputProps {
     // type: InputKind // 你赢了

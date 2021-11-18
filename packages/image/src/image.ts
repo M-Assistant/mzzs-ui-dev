@@ -1,5 +1,3 @@
-import { ImageFit } from "@/types"
-
 export const imageProps = {
     // 图片路径
     src: {
@@ -11,7 +9,7 @@ export const imageProps = {
     // 图片原生title属性
     title: String,
     // 图片显示方式
-    fit: String as ImageFit,
+    fit: String,
     // 是否开启懒加载
     lazy: Boolean,
     // 图片宽度

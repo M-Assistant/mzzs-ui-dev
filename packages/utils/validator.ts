@@ -24,5 +24,42 @@ export function isEmpty (val: any): boolean {
     || false
 }
 
+/**
+ * Checks if `value` is an number.
+ * @param {any} val 
+ * @returns {boolean} Returns `true` if `value` is number, else `false`.
+ */
+ export function isNumeric (val: any): boolean {
+    if (isDef(val)) return false
+    else if (typeof val === 'string') return /^-?\d+(\.\d+)?$/.test(val)
+    else if (typeof val === 'number') return true
+    else return false
+}
 
+/**
+ * Checks if `value` is an array.
+ * @param {any} val 
+ * @returns {boolean}
+ */
+export function isArray (val: any): boolean {
+    return Object.prototype.toString.call(val) === '[object Array]'
+}
 
+/**
+ * Checks if `value` is an key<=>val object.
+ * @param {any} val 
+ * @returns {boolean}
+ */
+export function isObject (val: any): boolean {
+    return Object.prototype.toString.call(val) === '[object Object]'
+}
+
+/**
+ * Checks if `value` is an url.
+ * @param {any} val 
+ * @returns {boolean}
+ */
+ export function isURL (val: any): boolean {
+    if (typeof val === 'string') return /^https?:\/\/.*/.test(val)
+    else return false
+}

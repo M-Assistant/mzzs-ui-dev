@@ -1,76 +1,39 @@
 <template>
-    <component ref="root" :is="tag" :class="iconClass" >
-        <img v-if="isLink" class="icon__image" :src="name"/>
+    <component
+        :is="tag" 
+        :class="iconClass" 
+        :style="{ 
+            color, 
+            fontSize: isLink ? undefined : fontSize,
+            transform: rotate === undefined ? undefined : `rotate(${rotate}deg)`
+        }">
+        <img v-if="isLink" :class="`${classPrefix}__image`" :src="name" :style="{ width: fontSize, height: fontSize }"/>
     </component>
 </template>
 
 <script lang="ts">
-import { IconProps } from '@/lib/types'
-import { computed, defineComponent, watchEffect, ref } from 'vue'
-import { FormatCssSize, isURL } from '@/lib/utils'
-import { useComponentName } from '@/lib/use'
-import { isDef } from '@/utils'
+import { useComponentName } from '@/use'
+import { isURL } from '@/utils/validator'
+import { formatCssSize } from '@/utils/format'
+import { computed, defineComponent } from 'vue'
+import { iconProps } from './icon'
 
 export default defineComponent({
-    name: useComponentName('icon'),
-    props: {
-        // 图标名称
-        name: {
-            type: String,
-            required: true
-        },
-        // 自定义图标前缀
-        classPrefix: {
-            type: String,
-            default: 'icon'
-        },
-        // 图标颜色
-        color: String,
-        // 图标大小，如 20px 2em，默认单位为px
-        size: [Number, String],
-        // 旋转角度
-        rotate: Number,
-        // HTML 标签
-        tag: {
-            type: String,
-            default: 'i'
-        },
-    },
-    setup (props: IconProps) {
-        const root = ref<HTMLElement>()
-        
+    name: useComponentName('Icon'),
+    props: iconProps,
+    setup (props) {        
         const isLink = computed(() => isURL(props.name))
-        const fontSize = computed(() => FormatCssSize(props.size))
-
+        const fontSize = computed(() => formatCssSize(props.size))
         const iconClass = computed(() => {
             const { classPrefix, name } = props
-
             const classList = [ classPrefix ]
-
             if (!isLink.value) {
-                classList.push(classPrefix + '-' + name)
+                classList.push(classPrefix + '--' + name)
             }
-
             return classList
-        })
-
-        watchEffect(() => {
-            if (root.value) {
-                const { color, size, rotate } = props
-                if (!isDef(color)) {
-                    root.value.style.setProperty('--icon-color', color || null)
-                }
-                if (!isDef(size)) {
-                    root.value.style.setProperty('--icon-size', FormatCssSize(size))
-                }
-                if (!isDef(rotate)) {
-                    root.value.style.setProperty('--icon-transform', `rotate(${rotate}deg)`)
-                }
-            }
         })
         
         return {
-            root,
             isLink,
             iconClass,
             fontSize

@@ -3,12 +3,26 @@ import Row from './row'
 import Col from './col'
 import Image from './image'
 import Avatar from './avatar'
+import Overlay from './overlay'
+import LazyRender from './lazy-render'
+import Icon from './icon'
+import Button from './button'
+import Tag from './tag'
+import Badge from './badge'
+import Backtop from './backtop'
 
 const components = [
     Row,
     Col,
     Image,
-    Avatar
+    Avatar,
+    Overlay,
+    LazyRender,
+    Icon,
+    Button,
+    Tag,
+    Badge,
+    Backtop
 ]
 
 

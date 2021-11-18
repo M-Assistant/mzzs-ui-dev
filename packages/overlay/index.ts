@@ -1,8 +1,5 @@
-import { App } from 'vue'
-import Overlay from './src/Overlay.vue'
+import Overlay from './src/overlay.vue'
+import { withInstall } from '@/utils/install'
 
-Overlay.install = (app: App): void => {
-  app.component(Overlay.name, Overlay)
-}
-
-export default Overlay
+const MzzsOverlay = withInstall(Overlay)
+export default MzzsOverlay

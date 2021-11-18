@@ -10,6 +10,7 @@ import { isDef } from '@/utils/validator'
 import { computed, defineComponent } from 'vue'
 import { colProps } from './col'
 
+
 export default defineComponent({
     name: useComponentName('Col'),
     props: colProps,

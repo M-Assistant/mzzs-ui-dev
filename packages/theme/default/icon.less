@@ -1,0 +1,50 @@
+@font-face {
+    font-family: "icon";
+    src: url('../../fonts/iconfont.ttf?t=1635665546524') format('truetype');
+}
+
+.mzzs-icon {
+    --icon-size: 1rem;
+    --icon-color: inherit;
+    --icon-transform: none;
+}
+
+// [class^="icon-"], [class*=" icon-"]
+.mzzs-icon {
+    display: inline-block;
+    font-family: "icon" !important;
+    font-style: normal;
+    font-size: var(--icon-size);
+    color: var(--icon-color);
+    transform: var(--icon-transform);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    &__image {
+        width: var(--icon-size);
+        height: var(--icon-size);
+        object-fit: cover;
+        vertical-align: top;
+    }
+}
+.mzzs-icon--close:before {
+    content: "\e63d";
+}
+.mzzs-icon--search:before {
+    content: "\e610";
+}
+.mzzs-icon--loading {
+    animation: icon-loading 2s linear 0s infinite normal none running;
+    &:before {
+        content: "\e627";
+    }
+}
+
+@keyframes icon-loading
+{
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

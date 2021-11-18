@@ -1,8 +1,5 @@
-import { App } from 'vue'
-import Icon from './src/Icon.vue'
+import Icon from './src/icon.vue'
+import { withInstall} from '@/utils/install'
 
-Icon.install = (app: App): void => {
-  app.component(Icon.name, Icon)
-}
-
-export default Icon
+const MzzsIcon = withInstall(Icon)
+export default MzzsIcon

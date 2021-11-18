@@ -1,5 +1,3 @@
-import { ColAlign, ColTextAlign } from "@/types"
-
 export const colProps = {
     // 列元素宽度 1~24
     span: [Number, String],
@@ -14,9 +12,9 @@ export const colProps = {
     // flex-basis: 分配多余空间之前，项目占据的主轴空间
     basis: [Number, String],
     // align-self: 属性允许单个项目有与其他项目不一样的对齐方式
-    align: String as ColAlign,
+    align: String,
     // text-align: 文本排列方式
-    textAlign: String as ColTextAlign,
+    textAlign: String,
     // 自定义元素标签
     tag: {
         type: String,

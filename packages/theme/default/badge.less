@@ -1,0 +1,42 @@
+.mzzs-badge {
+    --badge-size: 16px;
+    --badge-padding: 0 var(--mzzs-padding-base);
+    --badge-font-color: var(--mzzs-white-color);
+    --badge-font-size: var(--mzzs-font-size-xs);
+    --badge-border-color: var(--mzzs-white-color);
+    --badge-border-radius: var(--mzzs-border-radius-max);
+    --badge-background-color: #ee0a24;
+    --badge-dot-size: 8px;
+}
+
+.mzzs-badge {
+    display: inline-block;
+    box-sizing: border-box;
+    line-height: 1.2;
+    text-align: center;
+    min-width: var(--badge-size);
+    padding: var(--badge-padding);
+    color: var(--badge-font-color);
+    font-size: var(--badge-font-size);
+    background-color: var(--badge-background-color);
+    border: 1px solid var(--badge-border-color);
+    border-radius: var(--badge-border-radius);
+    &--wrapper {
+        position: relative;
+        display: inline-block;
+    }
+    &--fixed {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform-origin: 100%;
+        transform: translate(50%, -50%);
+    }
+    &--dot {
+        min-width: 0;
+        width: var(--badge-dot-size);
+        height: var(--badge-dot-size);
+        padding: 0;
+        border-radius: 100%;
+    }
+}
