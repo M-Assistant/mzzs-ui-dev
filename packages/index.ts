@@ -10,6 +10,8 @@ import Button from './button'
 import Tag from './tag'
 import Badge from './badge'
 import Backtop from './backtop'
+import Tabs from './tabs'
+import TabPane from './tab-pane'
 
 const components = [
     Row,
@@ -22,7 +24,9 @@ const components = [
     Button,
     Tag,
     Badge,
-    Backtop
+    Backtop,
+    Tabs,
+    TabPane
 ]
 
 

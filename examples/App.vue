@@ -1,5 +1,33 @@
 <template>
     <div class="test">
+        <h5>tabs、tab-pane 测试</h5>
+
+        <p>基础用法</p>
+        <div class="demo-tab">
+            <mzzs-tabs v-model="activeName" @click="handleClick" :before-change="handleBeforeChange">
+                <mzzs-tab-pane title="User" name="first">
+                    <template #title>
+                        <span>User</span>
+                    </template>
+                    User
+                </mzzs-tab-pane>
+                <mzzs-tab-pane title="Config" name="second">Config</mzzs-tab-pane>
+                <mzzs-tab-pane title="Role" name="third">Role</mzzs-tab-pane>
+                <mzzs-tab-pane title="Task" name="fourth1">Task</mzzs-tab-pane>
+                <mzzs-tab-pane title="Task" name="fourth2">Task</mzzs-tab-pane>
+                <mzzs-tab-pane title="Task" name="fourth3">Task</mzzs-tab-pane>
+                <mzzs-tab-pane title="Task" name="fourth4">Task</mzzs-tab-pane>
+                <mzzs-tab-pane title="Task" name="fourth5">Task</mzzs-tab-pane>
+                <mzzs-tab-pane title="Task" name="fourth6">Task</mzzs-tab-pane>
+                <mzzs-tab-pane title="Task" name="fourth7">Task</mzzs-tab-pane>
+                <mzzs-tab-pane title="Task" name="fourth8">Task</mzzs-tab-pane>
+                <mzzs-tab-pane title="Task" name="fourth9">Task</mzzs-tab-pane>
+            </mzzs-tabs>
+        </div>
+    </div>
+
+
+    <div class="test">
         <h5>backtop 测试</h5>
 
         <p>基础用法</p>
@@ -125,7 +153,6 @@
         <mzzs-image lazy class="test-image" :src="src" width="100" height="100" radius="50%" fit="cover" @click="onChangeImg"/>
     </div>
 
-
     <div class="test">
         <h5>Avatar 测试</h5>
 
@@ -217,6 +244,7 @@
 </template>
 
 <script lang="ts">
+import { Done } from '@/types'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -228,6 +256,8 @@ export default defineComponent({
         const show3 = ref(true)
         
         const src = ref('https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg')
+
+        const activeName = ref('first')
 
         // setTimeout(() => {
         //     show3.value = false
@@ -250,6 +280,14 @@ export default defineComponent({
             show,
             show2,
             show3,
+            activeName,
+            handleBeforeChange: (a: any, b :any, done: Done) => {
+                console.log(a, b)
+                done(true)
+            },
+            handleClick: (a: any, b: any) => {
+                console.log(a, b)
+            },
             onCloseOverlay: (e: PointerEvent) => {
                 show.value = false
                 show2.value = false
@@ -296,5 +334,9 @@ html, body {
 .demo-scroll {
     height: 200px;
     overflow: auto;
+}
+.demo-tab {
+    width: 500px;
+    height: 400px;
 }
 </style>

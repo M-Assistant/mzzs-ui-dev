@@ -1,0 +1,82 @@
+.mzzs-tabs {
+
+}
+
+.mzzs-tabs {
+    &__header {
+        padding: 0;
+        position: relative;
+        margin: 0 0 15px;
+    }
+    &__nav-wrap {
+        overflow: hidden;
+        margin-bottom: -1px;
+        position: relative;
+    }
+    &__nav-scroll {
+        overflow: hidden;
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #e4e7ed;
+        }
+    }
+    &__nav {
+        display: flex;
+        white-space: nowrap;
+        position: relative;
+        transition: transform .3s;
+        z-index: 1;
+    }
+    &__active-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 45px;
+        height: 2px;
+        background-color: #409eff;
+        z-index: 1;
+        transition: transform .3s cubic-bezier(.645,.045,.355,1);
+        list-style: none;
+        transform: translateX(71.4375px);;
+    }
+    &__item {
+        padding: 0 20px;
+        height: 40px;
+        box-sizing: border-box;
+        line-height: 40px;
+        display: inline-block;
+        list-style: none;
+        font-size: 14px;
+        font-weight: 500;
+        color: #303133;
+        position: relative;
+        cursor: pointer;
+        &.is-active {
+            color: var(--mzzs-primary-color)
+        }
+    }
+    &__content {
+        padding: 32px;
+        background-color: #f4f5f7;
+        color: #6b778c;
+        font-size: 32px;
+        font-weight: 600;
+
+        overflow: hidden;
+        position: relative;
+    }
+
+    &--line {
+        .mzzs-tabs__item {
+            
+        }
+    }
+    &--top {
+
+    }
+}

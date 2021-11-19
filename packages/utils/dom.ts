@@ -1,7 +1,20 @@
-import { ComponentClass, FormatFunction } from '@/types'
+import { ComponentClass, DomRectDetail, FormatFunction } from '@/types'
 import { trim } from './format'
 import { isArray, isObject } from './validator'
 
+const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
+const MOZ_HACK_REGEXP = /^moz([A-Z])/;
+
+/* istanbul ignore next */
+const camelCase = function(name: string) {
+    return name.replace(
+        SPECIAL_CHARS_REGEXP, 
+        function(_, separator, letter, offset) {
+            return offset ? letter.toUpperCase() : letter
+        }
+    ).replace(MOZ_HACK_REGEXP, 'Moz$1')
+}
+  
 
 /**
  * 获取父节点
@@ -14,6 +27,32 @@ export function getParentElement(el: HTMLElement) {
     }
     return el.parentElement
 }
+
+// export function getStyle(el: Element, styleName: string) {
+//     // @ts-ignore
+//     if(el.currentStyle) {
+//         // @ts-ignore
+//         return el.currentStyle[styleName];
+//     } else {
+//         return getComputedStyle(el, null)[styleName];
+//     }
+// }
+
+/* istanbul ignore next */
+export function getStyle(el: HTMLElement, styleName: any) {
+    styleName = camelCase(styleName)
+    if (styleName === 'float') {
+      styleName = 'cssFloat'
+    }
+
+    try {
+      var computed = document.defaultView?.getComputedStyle(el, '')
+      return el.style[styleName] || (computed ? computed[styleName] : null)
+    } catch (e) {
+      return el.style[styleName]
+    }
+}
+
 
 /**
  * 合并 class
@@ -138,5 +177,36 @@ export function setStyleProperty(el: HTMLElement, style: Record<string, { value:
 
 export function removeStyleProperty() {
 
+}
+
+export function getDomRectDetail(el: HTMLElement): DomRectDetail {
+    const rect = el.getBoundingClientRect()
+    const paddingLeft   = Number((getStyle(el, 'padding-left') || '0').replace('px', ''))
+    const paddingRight  = Number((getStyle(el, 'padding-right') || '0').replace('px', ''))
+    const paddingTop    = Number((getStyle(el, 'padding-top') || '0').replace('px', ''))
+    const paddingBottom = Number((getStyle(el, 'padding-bottom') || '0').replace('px', ''))
+    const rectDetail = {
+        x: rect.x,
+        y: rect.y,
+        left: rect.left,
+        right: rect.right,
+        top: rect.top,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        contentWidth: rect.width - paddingLeft - paddingRight,
+        contentHeight: rect.height - paddingTop - paddingBottom,
+        paddingLeft,
+        paddingRight,
+        paddingTop,
+        paddingBottom
+    }
+
+    return {
+        ...rectDetail,
+        toJSON: () => {
+            return JSON.stringify(rectDetail)
+        }
+    }
 }
 

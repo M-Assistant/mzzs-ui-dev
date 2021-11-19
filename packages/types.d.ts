@@ -1,32 +1,46 @@
 import { PropType } from 'vue'
 
-declare interface ObserverCallabck {
-    (entry: IntersectionObserverEntry, observer: MsIntersectionObserver): void
+export declare interface DomRectDetail extends DOMRect {
+    contentWidth: number
+    contentHeight: number
+    paddingLeft: number
+    paddingRight: number
+    paddingTop: number
+    paddingBottom: number
+    offsetX?: number
+    offsetY?: number
 }
 
-declare type ComponentClass = string | string[] | Record<string, boolean> | undefined
-declare type ComponentStyle = Record<string, any>
-declare type FormatFunction<T, R> = (val: any, extra?: T) => R
 
-declare type smoothCallback = (val:{ to: number, done: boolean }) => void
+export declare interface ObserverCallabck {
+    (entry: IntersectionObserverEntry, observer: MsIntersectionObserver): void
+}
+export declare type Done = (b?: boolean) => void
+export declare type ComponentClass = string | string[] | Record<string, boolean> | undefined
+export declare type ComponentStyle = Record<string, any>
+export declare type FormatFunction<T, R> = (val: any, extra?: T) => R
+export declare type smoothCallback = (val:{ to: number, done: boolean }) => void
+export declare type BeforeChangeFn = (newVal: any, oldVal: any, done: Done) => void
+
+
 
 
 export interface KeyValue {
     [key: string]: string | number | undefined
 }
 export type BeforCloseFn = (action: string, done: Done) => void
-export type Done = (b?: boolean) => void
+
 
 
 
 
 // ------------------------------------- row component ------------------------------
-export type RowDirection = PropType<'row' | 'row-reverse' | 'column' | 'column-reverse'>
-export type RowWrap = PropType<'no' | 'reverse'>
-export type RowJustify = PropType<'start' | 'center' | 'end' | 'between' | 'around'>
-export type RowAlignItems = PropType<'start' | 'center' | 'end' | 'baseline' | 'stretch'>
-export type RowAlignContent = PropType<'start' | 'center' | 'end' | 'between' | 'around' | 'stretch'>
-export interface RowProps {
+export declare type RowDirection = PropType<'row' | 'row-reverse' | 'column' | 'column-reverse'>
+export declare type RowWrap = PropType<'no' | 'reverse'>
+export declare type RowJustify = PropType<'start' | 'center' | 'end' | 'between' | 'around'>
+export declare type RowAlignItems = PropType<'start' | 'center' | 'end' | 'baseline' | 'stretch'>
+export declare type RowAlignContent = PropType<'start' | 'center' | 'end' | 'between' | 'around' | 'stretch'>
+export declare interface RowProps {
     gutter?: number | string
     direction?: RowDirection
     wrap?: RowWrap
@@ -40,9 +54,9 @@ export interface RowProps {
 
 
 // ------------------------------------- col component ------------------------------
-declare type ColAlign = PropType<'start' | 'center' | 'end' | 'baseline' | 'stretch'>
-declare type ColTextAlign = PropType<'left' | 'center' | 'right'>
-declare interface ColProps {
+export declare type ColAlign = PropType<'start' | 'center' | 'end' | 'baseline' | 'stretch'>
+export declare type ColTextAlign = PropType<'left' | 'center' | 'right'>
+export declare interface ColProps {
     span?: number | string
     offset?: number | string
     order?: number | string
@@ -58,8 +72,8 @@ declare interface ColProps {
 
 
 // ------------------------------------- image component ------------------------------
-declare type ImageFit = PropType<'contain' | 'cover' | 'fill' | 'none' | 'scale-down'>
-declare interface ImageProps {
+export declare type ImageFit = PropType<'contain' | 'cover' | 'fill' | 'none' | 'scale-down'>
+export declare interface ImageProps {
     src: string
     alt?: string
     title?: string
@@ -74,8 +88,8 @@ declare interface ImageProps {
 
 
 // ------------------------------------- avatar component ------------------------------
-declare type AvatarSize = PropType<number | string | 'large' | 'medium' | 'small'>
-declare interface AvatarProps {
+export declare type AvatarSize = PropType<number | string | 'large' | 'medium' | 'small'>
+export declare interface AvatarProps {
     src: string
     alt?: string
     title?: string
@@ -89,8 +103,8 @@ declare interface AvatarProps {
 
 
 // ------------------------------------- overlay component ------------------------------
-declare type OverlaypPosition = PropType<'relative' | 'absolute' | 'fixed'>
-declare interface OverlayProps {
+export declare type OverlaypPosition = PropType<'relative' | 'absolute' | 'fixed'>
+export declare interface OverlayProps {
     show: boolean
     lockScroll: boolean
     position?: OverlaypPosition
@@ -103,7 +117,7 @@ declare interface OverlayProps {
 
 
 // ------------------------------------- icon component ------------------------------
-export interface IconProps {
+export declare interface IconProps {
     name: string
     classPrefix: string
     color?: string
@@ -115,7 +129,20 @@ export interface IconProps {
 
 
 
-
+// ------------------------------------- icon component ------------------------------
+export declare interface TabsProps {
+    modelValue: any
+    type: 'line' | 'card' | 'border-card'
+    tabPosition: 'top' | 'right' | 'bottom' | 'left'
+    lineWidth: number | string
+    lineStrokeWidth: number | string
+    lineHeight: number | string
+    titleActiveColor: string
+    titleInactiveColor: string
+    closable: boolean
+    beforeChange: BeforeChangeFn
+}
+// ------------------------------------- icon component ------------------------------
 
 
 
