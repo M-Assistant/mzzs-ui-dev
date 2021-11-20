@@ -1,5 +1,5 @@
 @font-face {
-    font-family: "icon";
+    font-family: "mzzs-icon";
     src: url('../../fonts/iconfont.ttf?t=1635665546524') format('truetype');
 }
 
@@ -12,7 +12,7 @@
 // [class^="icon-"], [class*=" icon-"]
 .mzzs-icon {
     display: inline-block;
-    font-family: "icon" !important;
+    font-family: "mzzs-icon" !important;
     font-style: normal;
     font-size: var(--icon-size);
     color: var(--icon-color);
@@ -26,6 +26,33 @@
         vertical-align: top;
     }
 }
+
+.mzzs-icon--arrow-right:before {
+    content: "\e650";
+}
+.mzzs-icon--arrow-left {
+    transform: rotate(180deg);
+    transform-origin: center;
+    &:before {
+        content: "\e650";
+    }
+}
+.mzzs-icon--arrow-up {
+    transform: rotate(-90deg);
+    transform-origin: center;
+    &:before {
+        content: "\e650";
+    }
+}
+.mzzs-icon--arrow-down {
+    transform: rotate(90deg);
+    transform-origin: center;
+    &:before {
+        content: "\e650";
+    }
+}
+
+
 .mzzs-icon--close:before {
     content: "\e63d";
 }

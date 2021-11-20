@@ -1,5 +1,25 @@
 <template>
     <div class="test">
+        <h5>cell 测试</h5>
+
+        <p>基础用法</p>
+        <div class="demo-cell">
+            <mzzs-cell title="标题" value="内容"/>
+            <mzzs-cell title="标题" value="内容" is-link/>
+            <mzzs-cell title="标题" value="内容" required is-link/>
+            <mzzs-cell title="标题" value="内容" arrow-direction="left" is-link/>
+            <mzzs-cell title="标题" value="内容" arrow-direction="up" is-link/>
+            <mzzs-cell title="标题" value="内容" arrow-direction="down" is-link/>
+            <mzzs-cell title="标题" value="内容" icon="search" arrow-direction="down" is-link/>
+            <mzzs-cell title="标题" value="内容" center label="内容描述信息描述信息描述信息描述信息内容描述信息描述信息描述信息描述信息内容描述信息描述信息描述信息描述信息内容描述信息描述信息描述信息描述信息"/>
+            <mzzs-cell title="标题" value="内容" label="内容描述信息描述信息描述信息描述信息内容描述信息描述信息描述信息描述信息内容描述信息描述信息描述信息描述信息内容描述信息描述信息描述信息描述信息" size="large"/>
+            <mzzs-cell title="标题" value="内容" label="内容描述信息描述信息描述信息描述信息内容描述信息描述信息描述信息描述信息内容描述信息描述信息描述信息描述信息内容描述信息描述信息描述信息描述信息" size="medium" />
+            <mzzs-cell title="标题" value="内容描述信息描述信息描述信息描述信息" label="内容描述信息描述信息描述信息描述信息内容描述信息描述信息描述信息描述信息内容描述信息描述信息描述信息描述信息内容描述信息描述信息描述信息描述信息"/>
+            <mzzs-cell title="标题" center value="内容描述信息描述信息描述信息描述信息" label="内容描述信息描述信息描述信息描述信息内容描述信息描述信息描述信息描述信息内容描述信息描述信息描述信息描述信息内容描述信息描述信息描述信息描述信息"/>
+        </div>
+    </div>
+
+    <div class="test">
         <h5>tabs、tab-pane 测试</h5>
 
         <p>基础用法</p>
@@ -25,7 +45,6 @@
             </mzzs-tabs>
         </div>
     </div>
-
 
     <div class="test">
         <h5>backtop 测试</h5>
@@ -338,5 +357,10 @@ html, body {
 .demo-tab {
     width: 500px;
     height: 400px;
+}
+.demo-cell {
+    width: 500px;
+    padding: 10px;
+    background: #DDDDDD;
 }
 </style>

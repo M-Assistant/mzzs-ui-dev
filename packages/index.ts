@@ -12,6 +12,7 @@ import Badge from './badge'
 import Backtop from './backtop'
 import Tabs from './tabs'
 import TabPane from './tab-pane'
+import Cell from './cell'
 
 const components = [
     Row,
@@ -26,7 +27,8 @@ const components = [
     Badge,
     Backtop,
     Tabs,
-    TabPane
+    TabPane,
+    Cell
 ]
 
 

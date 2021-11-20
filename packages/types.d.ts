@@ -1,5 +1,31 @@
 import { PropType } from 'vue'
 
+// 常用类型申明
+// ui size
+export declare type MzzsUISize = 'large' | 'medium' | 'small'
+// ui direction
+export declare type MzzsUIDirection = 'up' | 'right' | 'down' | 'left'
+// css position
+export declare type MzzsUIPosition = 'relative' | 'absolute' | 'fixed'
+// ui location
+export declare type MzzsUILocation = 'top' | 'right' | 'bottom' | 'left'
+// ui coordinate
+export declare type MzzsUICoordinate = { x: number, y: number, z: number }
+// css object-fit
+export declare type MzzsUIImageFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
+// css text-align
+export declare type MzzsUITextAlign = 'left' | 'center' | 'right'
+// The method to decide whether the execution is completed 
+export declare type Done = (b?: boolean) => void
+// Function run before update
+export declare type BeforUpdateFn = (action: any, done: Done) => void
+
+
+
+
+
+
+// TODO: 重写
 export declare interface DomRectDetail extends DOMRect {
     contentWidth: number
     contentHeight: number
@@ -23,15 +49,9 @@ export declare type smoothCallback = (val:{ to: number, done: boolean }) => void
 export declare type BeforeChangeFn = (newVal: any, oldVal: any, done: Done) => void
 
 
-
-
 export interface KeyValue {
     [key: string]: string | number | undefined
 }
-export type BeforCloseFn = (action: string, done: Done) => void
-
-
-
 
 
 // ------------------------------------- row component ------------------------------
@@ -147,7 +167,28 @@ export declare interface TabsProps {
 
 
 
-
+// ------------------------------------- icon component ------------------------------
+export declare interface CellProps {
+    title: number | string
+    value: number | string
+    label: number | string
+    size: MzzsUISize
+    required: boolean
+    border: boolean
+    center: boolean
+    url: string,
+    to: string | RouteLocationRaw
+    replace: boolean
+    clickable: boolean
+    isLink: boolean
+    icon: string
+    iconPrefix: string
+    arrowDirection: MzzsUIDirection
+    titleClass: any
+    valueClass: any
+    labelClass: any
+}
+// ------------------------------------- icon component ------------------------------
 
 
 
