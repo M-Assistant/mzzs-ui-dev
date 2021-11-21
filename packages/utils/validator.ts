@@ -59,7 +59,23 @@ export function isObject (val: any): boolean {
  * @param {any} val 
  * @returns {boolean}
  */
- export function isURL (val: any): boolean {
+export function isURL (val: any): boolean {
     if (typeof val === 'string') return /^https?:\/\/.*/.test(val)
     else return false
+}
+
+/**
+ * Checks if `value` is an percentage.
+ * @param val 
+ * @returns 
+ */
+ export const isPercentage = function(val: any) {
+    return typeof val === 'string' && val.endsWith('%')
+}
+
+// Need to handle 1.0 as 100%, since once it is a number, there is no difference between it and 1
+// <http://stackoverflow.com/questions/7422072/javascript-how-to-detect-number-as-a-decimal-including-1-0>
+export const isOnePointZero = function(val: any) {
+
+    return typeof val === 'string' && val.indexOf('.') !== -1 && parseFloat(val) === 1;
 }

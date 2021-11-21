@@ -1,0 +1,157 @@
+.mzzs-color {
+    --color-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
+    --color-block-space: var(--mzzs-margin-xs);
+    --color-svpanel-width: 280px;
+    --color-svpanel-height: 180px;
+    
+    --color-slider-thumb-border: 1px solid #f0f0f0;
+    --color-slider-thumb-border-radius: var(--mzzs-border-radius-sm);
+    --color-slider-thumb-background-color: var(--mzzs-color-white);
+    --color-slider-thumb-box-shadow: 0 0 2px #0009;
+
+    --color-hue-slider-bar-stroke: 12px;
+    --color-alpha-slider-bar-stroke: 12px;
+
+    --color-predefine-margin-top: var(--mzzs-margin-xs);
+    --color-predefine-selector-width: 20px;
+    --color-predefine-selector-height: 20px;
+    --color-predefine-selector-border-radius: var(--mzzs-border-radius-md);
+
+}
+
+
+.mzzs-color {
+    position: relative;
+    box-sizing: border-box;
+    
+    &--main {
+        display: flex;
+        justify-content: space-between;
+    }
+    &--svpanel {
+        position: relative;
+        width: var(--color-svpanel-width);
+        height: var(--color-svpanel-height);
+        &-white, &-black {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+        &-white {
+            background: linear-gradient(to right,#fff,rgba(255,255,255,0));
+        }
+        &-black {
+            background: linear-gradient(to top,#000,rgba(0,0,0,0));
+        }
+        &-cursor {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 8px;
+            height: 8px;
+            box-shadow: 0 0 0 1.5px #fff, inset 0 0 1px 1px #0000004d, 0 0 1px 2px #0006;
+            border-radius: 50%;
+            transform: translate(-50%,-50%);
+        }
+    }
+    &--hue-slider-thumb, &--alpha-slider-thumb {
+        position: absolute;
+        left: 0;
+        top: 0;
+        border: var(--color-slider-thumb-border);
+        border-radius: var(--color-slider-thumb-border-radius);
+        background: var(--color-slider-thumb-background-color);
+        box-shadow: var(--color-slider-thumb-box-shadow);
+        box-sizing: border-box;
+        z-index: 1;
+    }
+    &--hue-slider {
+        position: relative;
+        width: var(--color-hue-slider-bar-stroke);
+        height: var(--color-svpanel-height);
+        &-bar {
+            height: inherit;
+            background: linear-gradient(to bottom,#f00 0%,#ff0 17%,#0f0 33%,#0ff 50%,#00f 67%,#f0f 83%,#f00 100%);
+        }
+        &-thumb {
+            width: 100%;
+            height: 4px;
+        }
+    }
+    &--alpha-slider {
+        position: relative;
+        width: var(--color-svpanel-width);
+        height: var(--color-hue-slider-bar-stroke);
+        margin-top: var(--color-block-space);
+        &-bar {
+            height: inherit;
+            background: linear-gradient(to right, rgba(255, 0, 0, 0) 0%, rgb(255, 0, 0) 100%);
+        }
+        &-thumb {
+            width: 4px;
+            height: 100%;
+        }
+    }
+    &--predefine {
+        margin-top: var(--color-block-space);
+        &-colors {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        &-color-selector {
+            margin: 0 4px 8px 4px;
+            background-image: var(--color-background);
+            border-radius: var(--color-predefine-selector-border-radius);
+            >div {
+                width: var(--color-predefine-selector-width);
+                height: var(--color-predefine-selector-height);
+                border-radius: var(--color-predefine-selector-border-radius);
+            }
+        }
+    }
+
+
+    &--output {
+        margin-top: var(--color-block-space);
+        display: flex;
+        align-items: center;
+        &-content {
+            flex: 1;
+            display: flex;
+            padding: 0 15px;
+            font-size: 0.875rem;
+            color: #767676;
+            text-align: center;
+        }
+        &-value {
+            flex: 1;
+            + .mzzs-color--output-value {
+                margin-left: 10px;
+            }
+        }
+        input {
+            width: 100%;
+            height: 28px;
+            line-height: 28px;
+            font-size: 1rem;
+            color: #606266;
+            outline: none;
+            background: transparent;
+            border: 1px solid #DDD;
+            box-sizing: border-box;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        p {
+            margin: 4px 0 0 0;
+        }
+        .mzzs-icon{
+            color: #919191;
+            &:active {
+                color: #333333;
+            }
+        }
+    }
+}

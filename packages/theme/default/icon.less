@@ -27,9 +27,15 @@
     }
 }
 
+// 搜索
+.mzzs-icon--search:before {
+    content: "\e610";
+}
+// 右方向 >
 .mzzs-icon--arrow-right:before {
     content: "\e650";
 }
+// 左方向 <
 .mzzs-icon--arrow-left {
     transform: rotate(180deg);
     transform-origin: center;
@@ -37,6 +43,7 @@
         content: "\e650";
     }
 }
+// 上方向 ^
 .mzzs-icon--arrow-up {
     transform: rotate(-90deg);
     transform-origin: center;
@@ -44,6 +51,7 @@
         content: "\e650";
     }
 }
+// 下方向 v
 .mzzs-icon--arrow-down {
     transform: rotate(90deg);
     transform-origin: center;
@@ -51,16 +59,31 @@
         content: "\e650";
     }
 }
-
-
+// 水平切换
+.mzzs-icon--switch {
+    &:before {
+        content: "\e6b4";
+    }
+}
+// 垂直切换
+.mzzs-icon--vertical-switch {
+    transform: rotate(90deg);
+    transform-origin: center;
+    &:before {
+        content: "\e6b4";
+    }
+}
+// 拷贝
+.mzzs-icon--copy:before {
+    content: "\e67b";
+}
+// 关闭 x
 .mzzs-icon--close:before {
     content: "\e63d";
 }
-.mzzs-icon--search:before {
-    content: "\e610";
-}
+// 加载
 .mzzs-icon--loading {
-    animation: icon-loading 2s linear 0s infinite normal none running;
+    animation: icon-loading 1s linear 0s infinite normal none running;
     &:before {
         content: "\e627";
     }

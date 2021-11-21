@@ -1,3 +1,5 @@
+<!-- TODO: 必须重构，且拆分成多个组件完成。请参考 color -->
+
 <script lang="ts">
 import { Done, TabsProps } from '@/types'
 import { useComponentName, useRect } from '@/use'

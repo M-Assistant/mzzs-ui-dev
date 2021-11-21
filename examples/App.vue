@@ -1,5 +1,14 @@
 <template>
     <div class="test">
+        <h5>color 测试</h5>
+
+        <p>基础用法</p>
+        <div class="demo-color">
+            <mzzs-color-picker />
+        </div>
+    </div>
+
+    <div class="test">
         <h5>cell 测试</h5>
 
         <p>基础用法</p>
@@ -267,7 +276,6 @@ import { Done } from '@/types'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  components: { Image },
     name: 'App',
     setup () {
         const show = ref(false)
@@ -362,5 +370,8 @@ html, body {
     width: 500px;
     padding: 10px;
     background: #DDDDDD;
+}
+.demo-color {
+    width: 300px;
 }
 </style>

@@ -13,6 +13,7 @@ import Backtop from './backtop'
 import Tabs from './tabs'
 import TabPane from './tab-pane'
 import Cell from './cell'
+import ColorPicker from './color-picker'
 
 const components = [
     Row,
@@ -28,7 +29,8 @@ const components = [
     Backtop,
     Tabs,
     TabPane,
-    Cell
+    Cell,
+    ColorPicker
 ]
 
 
