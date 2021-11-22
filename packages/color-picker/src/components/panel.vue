@@ -7,18 +7,30 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount, onMounted, reactive, ref } from 'vue'
+import { computed, defineComponent, inject, onBeforeMount, onMounted, reactive, ref, watch } from 'vue'
 import { addDraggableListener, removeDraggableListener } from '@/utils/draggable'
+import Color from '@/utils/color'
 import { useRect } from '@/use'
+import { colorOnchange, colorValue } from '../color-picker'
 
 export default defineComponent({
     setup() {
+        
+        const color = inject(colorValue)
+        const onchange = inject(colorOnchange)
+
         const root = ref<HTMLElement>()
         const cursor = reactive({
             left: 0,
             top: 0
         })
-        const panelColor = ref('rgb(255, 69, 0)')
+        
+        const panelColor = computed(() => {
+            if (color) {
+                const { h } = color
+                return `hsl(${h}, 100%, 50%)`
+            }
+        })
 
         const handleDrag = (e: Event) => {
             if (root.value) {
@@ -33,21 +45,17 @@ export default defineComponent({
                 cursor.left = left
                 cursor.top = top
 
-                // this.color.set({
-                // saturation: left / rect.width * 100,
-                // value: 100 - top / rect.height * 100
-                // });
+                const s = left / rect.width * 100
+                const l = 100 - top / rect.height * 100
+                onchange && onchange(undefined, s, l)
             }
-
-
-            
         }
 
         onMounted(() => {
             if (root.value) {
                 const config = {
                     drag: (e: Event) => handleDrag(e),
-                    end: (e: Event) => {}
+                    end: (e: Event) => handleDrag(e)
                 }
                 addDraggableListener(root.value, config)
             }
@@ -62,6 +70,7 @@ export default defineComponent({
         return {
             root,
             cursor,
+            color,
             panelColor
         }
     },

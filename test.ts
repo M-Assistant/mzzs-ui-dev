@@ -1,5 +1,5 @@
-export declare type HSL = { h: number, s: number; l: number, a?: number }
-export declare type HSV = { h: number, s: number; v: number, a?: number }
+type HSL = { h: number, s: number; l: number, a?: number }
+type HSV = { h: number, s: number; v: number, a?: number }
 
 const _colorKeywords: {[key: string]: number} = { 'aliceblue': 0xF0F8FF, 'antiquewhite': 0xFAEBD7, 'aqua': 0x00FFFF, 'aquamarine': 0x7FFFD4, 'azure': 0xF0FFFF,
 	'beige': 0xF5F5DC, 'bisque': 0xFFE4C4, 'black': 0x000000, 'blanchedalmond': 0xFFEBCD, 'blue': 0x0000FF, 'blueviolet': 0x8A2BE2,
@@ -37,7 +37,7 @@ function hue2rgb(p: number, q: number, t: number) {
 }
 
 
-export default class Color {
+class Color {
     // 红色分量（0~1）
     r: number = 1
     // 绿色分量（0~1）
@@ -46,7 +46,7 @@ export default class Color {
     b: number = 1
     // 透明度（0~1）
     alpha: number = 1
-
+    
     constructor(r?: number | string | Color, g?: number, b?: number, a?: number) {
         if (a !== undefined) {
             this.setAlpha(a)
@@ -56,7 +56,7 @@ export default class Color {
             if (g === undefined && b === undefined) {
                 return this.set(r)
             } else if (typeof r === 'number') {
-                return this.setRGB(r, g || 1, b || 1)
+                return this.setRGB(r, g, b)
             }
         }
         return this

@@ -1,8 +1,3 @@
-/**
- * 拖拽事件
- * @param el 
- * @param options 
- */
 interface draggableOptions {
     start?: (e: Event) => void
     drag?: (e: Event) => void
