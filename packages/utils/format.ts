@@ -1,15 +1,3 @@
-import { isDef } from "./validator"
-
-/**
- * 去除空格
- * @param val 
- * @returns 
- */
-export const trim = function(val?: string) {
-    return (val || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '')
-}
-
-
 /**
  * 格式化图片路径
  * @param {string} val

@@ -1,4 +1,6 @@
-interface draggableOptions {
+import { off, on } from "./event"
+
+export declare interface draggableOptions {
     start?: (e: Event) => void
     drag?: (e: Event) => void
     end?: (e: Event) => void
@@ -58,7 +60,7 @@ export function addDraggableListener(el: HTMLElement, options: draggableOptions)
     }
 
     listenerCallback.set(el, startFn)
-    el.addEventListener('mousedown', startFn)
+    on(el, 'mousedown', startFn)
 }
 
 /**
@@ -70,6 +72,6 @@ export function addDraggableListener(el: HTMLElement, options: draggableOptions)
 export function removeDraggableListener(el: HTMLElement) {
     const fn = listenerCallback.get(el)
     if (fn) {
-        el.addEventListener('mousedown', fn)
+        off(el, 'mousedown', fn)
     }
 }

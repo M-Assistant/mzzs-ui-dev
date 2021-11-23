@@ -36,7 +36,7 @@ function hue2rgb(p: number, q: number, t: number) {
     return p
 }
 
-
+// TODO: 有bug等待修复
 export default class Color {
     // 红色分量（0~1）
     r: number = 1

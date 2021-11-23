@@ -1,5 +1,73 @@
 <template>
     <div class="test">
+        <h5>collapse 测试</h5>
+
+        <p>基础用法</p>
+        <div class="demo-collapse">
+            <mzzs-collapse v-model="activeNames" @change="handleChange">
+                <mzzs-collapse-item title="Consistency" name="1">
+                    <div>
+                    Consistent with real life: in line with the process and logic of real
+                    life, and comply with languages and habits that the users are used to;
+                    </div>
+                    <div>
+                    Consistent within interface: all elements should be consistent, such
+                    as: design style, icons and texts, position of elements, etc.
+                    </div>
+                </mzzs-collapse-item>
+                <mzzs-collapse-item title="Feedback" name="2">
+                    <div>
+                    Operation feedback: enable the users to clearly perceive their
+                    operations by style updates and interactive effects;
+                    </div>
+                    <div>
+                    Visual feedback: reflect current state by updating or rearranging
+                    elements of the page.
+                    </div>
+                </mzzs-collapse-item>
+                <mzzs-collapse-item title="Efficiency" name="3">
+                    <div>
+                    Simplify the process: keep operating process simple and intuitive;
+                    </div>
+                    <div>
+                    Definite and clear: enunciate your intentions clearly so that the
+                    users can quickly understand and make decisions;
+                    </div>
+                    <div>
+                    Easy to identify: the interface should be straightforward, which helps
+                    the users to identify and frees them from memorizing and recalling.
+                    </div>
+                </mzzs-collapse-item>
+                <mzzs-collapse-item title="Controllability" name="4">
+                    <div>
+                    Decision making: giving advices about operations is acceptable, but do
+                    not make decisions for the users;
+                    </div>
+                    <div>
+                    Controlled consequences: users should be granted the freedom to
+                    operate, including canceling, aborting or terminating current
+                    operation.
+                    </div>
+                </mzzs-collapse-item>
+            </mzzs-collapse>
+        </div>
+    </div>
+    <div class="test">
+        <h5>popover 测试</h5>
+
+        <p>基础用法</p>
+        <div class="demo-popover">
+            <mzzs-popover v-model="showPopover">
+                <template #default>
+                    这是弹出内容
+                </template>
+                <template #reference>
+                    <mzzs-button id="test-button" style="padding: 10px; border-top: 10px solid red;">自定义内容</mzzs-button>
+                </template>
+            </mzzs-popover>
+        </div>
+    </div>
+    <div class="test">
         <h5>color 测试</h5>
 
         <p>基础用法</p>
@@ -55,7 +123,7 @@
         </div>
     </div>
 
-    <div class="test">
+    <!--<div class="test">
         <h5>backtop 测试</h5>
 
         <p>基础用法</p>
@@ -264,7 +332,7 @@
             <mzzs-button icon="search" layout="column">按钮</mzzs-button>
             <mzzs-button icon="search" layout="column-reverse">按钮</mzzs-button>
         </mzzs-row>
-    </div>
+    </div>-->
 
 
 
@@ -272,15 +340,19 @@
 </template>
 
 <script lang="ts">
+import Input from '@/input/src/Input.vue'
 import { Done } from '@/types'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
+  components: { Input },
     name: 'App',
     setup () {
         const show = ref(false)
         const show2 = ref(true)
         const show3 = ref(true)
+        const showPopover = ref(false)
+        const activeNames = ref([])
         
         const src = ref('https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg')
 
@@ -308,6 +380,8 @@ export default defineComponent({
             show2,
             show3,
             activeName,
+            showPopover,
+            activeNames,
             handleBeforeChange: (a: any, b :any, done: Done) => {
                 console.log(a, b)
                 done(true)
@@ -373,5 +447,13 @@ html, body {
 }
 .demo-color {
     width: 300px;
+}
+.demo-popover {
+    text-align: center;
+}
+.demo-collapse {
+    width: 500px;
+    margin: 0 auto;
+    border: 10px solid #dddddd;
 }
 </style>

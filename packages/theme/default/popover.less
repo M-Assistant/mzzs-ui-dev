@@ -1,0 +1,111 @@
+.mzzs-popover {}
+
+
+.mzzs-popover {
+    position: absolute;
+    overflow: visible;
+    background-color: transparent;
+
+    // top           # 顶部中间位置
+    // top-start     # 顶部左侧位置
+    // top-end       # 顶部右侧位置
+    // left          # 左侧中间位置
+    // left-start    # 左侧上方位置
+    // left-end      # 左侧下方位置
+    // right         # 右侧中间位置
+    // right-start   # 右侧上方位置
+    // right-end     # 右侧下方位置
+    // bottom        # 底部中间位置
+    // bottom-start  # 底部左侧位置
+    // bottom-end    # 底部右侧位置
+
+    &[popper-placement^="top"] .mzzs-popover--arrow {
+        bottom: 0;
+        border-top-color: currentColor;
+        border-bottom-width: 0;
+        transform: translate(-50%, 100%);
+    }
+    &[popper-placement="top"] .mzzs-popover--arrow {
+        left: 50%;
+    }
+    &[popper-placement="top-start"] .mzzs-popover--arrow {
+        left: 16px;
+    }
+    &[popper-placement="top-end"] .mzzs-popover--arrow {
+        right: 16px;
+    }
+    &[popper-placement^="left"] .mzzs-popover--arrow {
+        right: 0;
+        border-right-width: 0;
+        border-left-color: currentColor;
+        transform: translate(100%, -50%);
+    }
+    &[popper-placement="left"] .mzzs-popover--arrow {
+        top: 50%;
+    }
+    &[popper-placement="left-start"] .mzzs-popover--arrow {
+        top: 16px;
+    }
+    &[popper-placement="left-end"] .mzzs-popover--arrow {
+        bottom: 16px;
+    }
+    &[popper-placement^="right"] .mzzs-popover--arrow {
+        left: 0;
+        border-right-color: currentColor;
+        border-left-width: 0;
+        transform: translate(-100%, -50%);
+    }
+    &[popper-placement="right"] .mzzs-popover--arrow {
+        top: 50%;
+    }
+    &[popper-placement="right-start"] .mzzs-popover--arrow {
+        top: 16px;
+    }
+    &[popper-placement="right-end"] .mzzs-popover--arrow {
+        bottom: 16px;
+    }
+    &[popper-placement^="bottom"] .mzzs-popover--arrow {
+        top: 0;
+        border-top-width: 0;
+        border-bottom-color: currentColor;
+        transform: translate(-50%, -100%);
+    }
+    &[popper-placement="bottom"] .mzzs-popover--arrow {
+        left: 50%;
+    }
+    &[popper-placement="bottom-start"] .mzzs-popover--arrow {
+        left: 16px
+    }
+    &[popper-placement="bottom-end"] .mzzs-popover--arrow {
+        right: 16px;
+    }
+
+    &--wrapper {
+        display: inline-block;
+    }
+    &--arrow {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 6px;
+        color: #fff;
+
+        top: 0;
+        left: 16px;
+        border-top-width: 0;
+        border-bottom-color: currentColor;
+        -webkit-transform: translate(-50%, -100%);
+        transform: translate(-50%, -100%);
+    }
+    &--content {
+        background: #ffffff;
+        overflow: hidden;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 12px rgba(50, 50, 51, 0.3);
+    }
+}
+
+

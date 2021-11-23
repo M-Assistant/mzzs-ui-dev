@@ -14,6 +14,9 @@ import Tabs from './tabs'
 import TabPane from './tab-pane'
 import Cell from './cell'
 import ColorPicker from './color-picker'
+import Popover from './popover'
+import Collapse from './collapse'
+import CollapseItem from './collapse-item'
 
 const components = [
     Row,
@@ -30,7 +33,10 @@ const components = [
     Tabs,
     TabPane,
     Cell,
-    ColorPicker
+    ColorPicker,
+    Popover,
+    Collapse,
+    CollapseItem
 ]
 
 

@@ -1,44 +1,30 @@
-import { ComponentClass, DomRectDetail, FormatFunction } from '@/types'
-import { trim } from './format'
-import { isArray, isObject } from './validator'
+import { MzzsClass, DomRectDetail, MzzsFormatFn } from '@/types'
+import { trim, camelCase, transformNumber } from './util'
+import { isArray, isDef, isObject, isString } from './validator'
 
-const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
-const MOZ_HACK_REGEXP = /^moz([A-Z])/;
-
-/* istanbul ignore next */
-const camelCase = function(name: string) {
-    return name.replace(
-        SPECIAL_CHARS_REGEXP, 
-        function(_, separator, letter, offset) {
-            return offset ? letter.toUpperCase() : letter
-        }
-    ).replace(MOZ_HACK_REGEXP, 'Moz$1')
+export declare interface DomBox {
+    x: number
+    y: number
+    left: number
+    right: number
+    top: number
+    bottom: number
+    width: number
+    height: number
+    contentWidth: number
+    contentHeight: number
+    margin: number[]
+    padding: number[]
+    border: number[]
 }
-  
+
 
 /**
- * 获取父节点
- * @param el 
- * @returns 
+ * 获取元素样式
+ * @param {HTMLElement} el 
+ * @param {any} styleName 
+ * @returns {string|null}
  */
-export function getParentElement(el: HTMLElement) {
-    if (!el.parentElement) {
-        return document.body
-    }
-    return el.parentElement
-}
-
-// export function getStyle(el: Element, styleName: string) {
-//     // @ts-ignore
-//     if(el.currentStyle) {
-//         // @ts-ignore
-//         return el.currentStyle[styleName];
-//     } else {
-//         return getComputedStyle(el, null)[styleName];
-//     }
-// }
-
-/* istanbul ignore next */
 export function getStyle(el: HTMLElement, styleName: any) {
     styleName = camelCase(styleName)
     if (styleName === 'float') {
@@ -46,7 +32,7 @@ export function getStyle(el: HTMLElement, styleName: any) {
     }
 
     try {
-      var computed = document.defaultView?.getComputedStyle(el, '')
+      var computed = document.defaultView?.getComputedStyle(el, null)
       return el.style[styleName] || (computed ? computed[styleName] : null)
     } catch (e) {
       return el.style[styleName]
@@ -55,45 +41,84 @@ export function getStyle(el: HTMLElement, styleName: any) {
 
 
 /**
- * 合并 class
- * @param origin 
- * @param other_class 
- * @returns 
+ * 设置元素 Property 样式
+ * @param {HTMLElement} el 
+ * @param {any} styleName 
+ * @returns {string|null}
  */
-export function mergeClass(origin: ComponentClass, ...other_class: string[]) {
-    if (origin === undefined) {
-        origin = other_class.join(' ')
-    } if (typeof origin === 'string') {
-        origin = trim(origin + ' ' + other_class.join(' '))
-    } else if (isArray(origin)) {
-        for (let i = 0; i < other_class.length; ++i) {
-            const clsName: string = other_class[i]
-            if (clsName === '') continue
+export function setStyleProperty(el: HTMLElement, style: Record<string, { value: any, format?: MzzsFormatFn<any, any> }>) {
+    Object.keys(style).forEach((key: string) => {
+        const item = style[key]
 
-            if ((origin as string[]).indexOf(clsName) === -1) {
-                (origin as string[]).push(clsName)
-            }
+        let val = item.value
+        if (typeof item.format === 'function') {
+            val = item.format(val)
         }
-    } else if (isObject(origin)) {
-        for (let i = 0; i < other_class.length; ++i) {
-            const clsName: string = other_class[i]
-            if (clsName === '') continue
 
-            (origin as Record<string, boolean>)[clsName] = true
+        if (isDef(val)) {
+            el.style.removeProperty(key)
+        } else {
+            el.style.setProperty(key, val)
+        }
+    })
+}
+
+
+/**
+ * 获取父节点
+ * @param {HTMLElement} el 
+ * @returns {HTMLElement|null}
+ */
+export function getParentElement(el: HTMLElement) {
+    return el.parentElement
+}
+
+
+/**
+ * 获取一个 dom 盒子对象
+ * @param {HTMLElement} el 
+ * @returns {DomBox}
+ */
+export function getDomBox(el: HTMLElement): DomBox {
+    // 盒子对象包含如下属性：
+    const { x, y, left, right, top, bottom, width, height } = el.getBoundingClientRect()
+    const box = {
+        x, y, left, right, top, bottom, width, height,
+        contentWidth: 0,
+        contentHeight: 0,
+        border: [0, 0, 0, 0],
+        margin: [0, 0, 0, 0],
+        padding: [0, 0, 0, 0]
+    }
+
+    // 计算 外边距、内边距、边框
+    for (const v of ['margin', 'padding', 'border']) {
+        const style = getStyle(el, v === 'border' ? 'border-width' : v)?.split(' ')
+        if (style && style.length > 0) {
+            const _s = style.map(v => transformNumber(v))
+            box[v][0] = _s[0]
+            box[v][1] = _s[1] !== undefined ? _s[1] : box[v][0]
+            box[v][2] = _s[2] !== undefined ? _s[2] : box[v][0]
+            box[v][3] = _s[3] !== undefined ? _s[3] : box[v][1]
         }
     }
-    return origin
+
+    // 计算内容宽高
+    box.contentWidth  = width - box.padding[1] - box.padding[3] - box.border[1] - box.border[3]
+    box.contentHeight = height - box.padding[0] - box.padding[2] - box.border[0] - box.border[2]
+
+    return box
 }
 
 
 /**
  * 判断 class 是否存在
- * @param {HTMLElement | undefined} el 
- * @param {string}cls 
+ * @param {HTMLElement} el 
+ * @param {string} cls 
  * @returns {boolean}
  */
-export function hasClass(el: HTMLElement | undefined, cls: string): boolean {
-    if (!el) return false
+ export function hasClass(el?: HTMLElement, cls?: string): boolean {
+    if (!el || !cls) return false
 
     if (el.classList) {
         return el.classList.contains(cls)
@@ -102,14 +127,15 @@ export function hasClass(el: HTMLElement | undefined, cls: string): boolean {
     }
 }
 
+
 /**
  * 添加 class
- * @param {HTMLElement | undefined} el 
- * @param {string}cls 
+ * @param {HTMLElement} el 
+ * @param {string} cls 
  * @returns 
  */
-export function addClass(el: HTMLElement | undefined, cls: string) {
-    if (!el) return
+export function addClass(el?: HTMLElement, cls?: string) {
+    if (!el || !cls) return
 
     let curClass = el.className
     const classes = cls.split(' ')
@@ -129,15 +155,16 @@ export function addClass(el: HTMLElement | undefined, cls: string) {
         el.setAttribute('class', curClass)
     }
 }
-  
+
+
 /**
  * 移除 class
- * @param {HTMLElement | undefined} el 
- * @param {string}cls 
+ * @param {HTMLElement} el 
+ * @param {string} cls 
  * @returns 
  */
-export function removeClass(el: HTMLElement | undefined, cls: string) {
-    if (!el) return
+export function removeClass(el?: HTMLElement, cls?: string) {
+    if (!el || !cls) return
 
     let curClass = ' ' + el.className + ' '
     const classes = cls.split(' ')
@@ -159,43 +186,81 @@ export function removeClass(el: HTMLElement | undefined, cls: string) {
 }
 
 
-export function setStyleProperty(el: HTMLElement, style: Record<string, { value: any, format?: FormatFunction<any, any> }>) {
-    Object.keys(style).forEach((key: string) => {
-        const item = style[key]
-        let val = item.value
-        if (typeof item.format === 'function') {
-            val = item.format(val)
+/**
+ * 合并 class
+ * @param {MzzsClass} origin 
+ * @param {MzzsClass} classs 
+ * @returns {MzzsClass}
+ */
+ export function mergeClass(origin: MzzsClass, classs: MzzsClass) {
+    if (!origin) return classs
+    
+    if (isString(classs)) {
+        
+        if (isString(origin)) {
+            return trim(origin + ' ' + classs)
+        } else if (isArray(origin)) {
+            if (origin.indexOf(classs) === -1) {
+                origin.push(classs)
+            }
+        } else if (isObject(origin)) {
+            origin[classs] = true
         }
 
-        if (val === undefined || val === null) {
-            el.style.removeProperty(key)
-        } else {
-            el.style.setProperty(key, val)
-        }
-    })
+    } else if (isArray(classs)) {
+
+        classs.forEach(v => origin = mergeClass(origin, v))
+
+    } else if (isObject(classs)) {
+
+        Object.keys(classs).forEach(k => {
+            if (classs[k] === true) {
+                origin = mergeClass(origin, k)
+            }
+        })
+
+    }
+
+    return origin
 }
 
-export function removeStyleProperty() {
 
-}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 废弃
 export function getDomRectDetail(el: HTMLElement): DomRectDetail {
-    const rect = el.getBoundingClientRect()
+    const { x, y, left, right, top, bottom, width, height } = el.getBoundingClientRect()
     const paddingLeft   = Number((getStyle(el, 'padding-left') || '0').replace('px', ''))
     const paddingRight  = Number((getStyle(el, 'padding-right') || '0').replace('px', ''))
     const paddingTop    = Number((getStyle(el, 'padding-top') || '0').replace('px', ''))
     const paddingBottom = Number((getStyle(el, 'padding-bottom') || '0').replace('px', ''))
     const rectDetail = {
-        x: rect.x,
-        y: rect.y,
-        left: rect.left,
-        right: rect.right,
-        top: rect.top,
-        bottom: rect.bottom,
-        width: rect.width,
-        height: rect.height,
-        contentWidth: rect.width - paddingLeft - paddingRight,
-        contentHeight: rect.height - paddingTop - paddingBottom,
+        x, y, left, right, top, bottom, width, height,
+        contentWidth: width - paddingLeft - paddingRight,
+        contentHeight: height - paddingTop - paddingBottom,
         paddingLeft,
         paddingRight,
         paddingTop,

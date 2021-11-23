@@ -37,11 +37,21 @@ export function isEmpty (val: any): boolean {
 }
 
 /**
+ * Checks if `value` is an string.
+ * @param {any} val 
+ * @returns {boolean}
+ */
+ export function isString (val: any): val is string {
+    return typeof val === 'string'
+}
+
+
+/**
  * Checks if `value` is an array.
  * @param {any} val 
  * @returns {boolean}
  */
-export function isArray (val: any): boolean {
+export function isArray (val: any): val is any[] {
     return Object.prototype.toString.call(val) === '[object Array]'
 }
 
@@ -50,7 +60,7 @@ export function isArray (val: any): boolean {
  * @param {any} val 
  * @returns {boolean}
  */
-export function isObject (val: any): boolean {
+export function isObject (val: any): val is Record<number|string, any> {
     return Object.prototype.toString.call(val) === '[object Object]'
 }
 

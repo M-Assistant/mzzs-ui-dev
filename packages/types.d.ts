@@ -21,8 +21,12 @@ export declare type Done = (b?: boolean) => void
 export declare type BeforUpdateFn = (action: any, done: Done) => void
 
 
-
-
+// 格式化函数
+export declare type MzzsFormatFn<T, R> = (val: any, extra?: T) => R
+// class prop
+export declare type MzzsClass = string | string[] | Record<string, boolean> | undefined
+// style prop
+export declare type MzzsStyle = Record<string, any> | undefined
 
 
 // TODO: 重写
@@ -42,9 +46,8 @@ export declare interface ObserverCallabck {
     (entry: IntersectionObserverEntry, observer: MsIntersectionObserver): void
 }
 export declare type Done = (b?: boolean) => void
-export declare type ComponentClass = string | string[] | Record<string, boolean> | undefined
-export declare type ComponentStyle = Record<string, any>
-export declare type FormatFunction<T, R> = (val: any, extra?: T) => R
+
+
 export declare type smoothCallback = (val:{ to: number, done: boolean }) => void
 export declare type BeforeChangeFn = (newVal: any, oldVal: any, done: Done) => void
 

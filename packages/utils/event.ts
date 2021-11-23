@@ -1,46 +1,51 @@
-import { smoothCallback } from "@/types"
-
 const userAgent = window.navigator.userAgent
 const isSafari = (userAgent.indexOf('Chrome') === -1) && (userAgent.indexOf('Safari') >= 0)
 
-function easeOutCubic(t: number) {
-    return 1 - Math.pow(1 - t, 3);
-}
 
-// 平滑进步
-export const formToSmooth  = (form: number, to: number, duration: number, callback: smoothCallback) => {
-    const startTime = Date.now()
-    const delta = to - form
-
-    function tick(now: number) {
-        const completion = (now - startTime) / duration
-        if (completion < 1) {
-            return { to: form + delta * easeOutCubic(completion), done: false }                
-        }
-        return { to, done: true }
+/**
+ * 监听事件
+ * @param {Element|Document|Window} el 
+ * @param {String} event 
+ * @param {Function} handler 
+ */
+ export function on(el: Element|Document|Window, event: string, handler: (e: Event) => void) {
+    if (document.addEventListener !== undefined) {
+        el.addEventListener(event, handler, false)
+        // @ts-ignore
+    } else if (document.attachEvent !== undefined) {
+        // @ts-ignore
+        el.attachEvent('on' + event, handler)
+    } else {
+        console.warn(`Add Event "${event}" Listen failed`)
     }
-
-    // 每一帧触发的函数
-    function running() {
-        const update = tick(Date.now())
-        callback(update)
-        
-        if (update.done) {
-            return
-        }
-        requestAnimationFrame(running)
-    }
-    requestAnimationFrame(running)
 }
 
 
 /**
- * 废弃
+ * 取消事件监听
+ * @param {Element|Document|Window} el 
+ * @param {String} event 
+ * @param {Function} handler 
+ */
+export function off(el: Element|Document|Window, event: string, handler: (e: Event) => void) {
+    if (document.removeEventListener !== undefined) {
+        el.removeEventListener(event, handler, false)
+        // @ts-ignore
+    } else if (document.detachEvent !== undefined) {
+        // @ts-ignore
+        el.detachEvent('on' + event, handler)
+    } else {
+        console.warn(`Cancel Event "${event}" Listen failed`)
+    }
+}
+
+
+/**
  * 标准化滚轮事件。返回一个对象如下：{ deltaX: 1, deltaY: -1 }，其中 1 代表向上，-1 代表向下
  * @param {Event} e 
  * @returns 
  */
- export function standardizedWheel(e: Event) {
+export function standardizedWheel(e: Event) {
     const wheelEvent = { deltaX: 0, deltaY: 0 }
 
     // @ts-ignore
@@ -75,4 +80,3 @@ export const formToSmooth  = (form: number, to: number, duration: number, callba
 
     return Object.assign({}, e, wheelEvent)
 }
-
