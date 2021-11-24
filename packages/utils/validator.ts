@@ -29,7 +29,16 @@ export function isEmpty (val: any): boolean {
  * @param {any} val 
  * @returns {boolean} Returns `true` if `value` is number, else `false`.
  */
- export function isNumeric (val: any): boolean {
+export function isNumber (val: any): val is Number {
+    return !(typeof val !== 'number' || isNaN(val) || val === Infinity)
+}
+
+/**
+ * Checks if `value` is an number.
+ * @param {any} val 
+ * @returns {boolean} Returns `true` if `value` is number, else `false`.
+ */
+export function isNumeric (val: any): boolean {
     if (isDef(val)) return false
     else if (typeof val === 'string') return /^-?\d+(\.\d+)?$/.test(val)
     else if (typeof val === 'number') return true
@@ -41,10 +50,9 @@ export function isEmpty (val: any): boolean {
  * @param {any} val 
  * @returns {boolean}
  */
- export function isString (val: any): val is string {
+export function isString (val: any): val is string {
     return typeof val === 'string'
 }
-
 
 /**
  * Checks if `value` is an array.

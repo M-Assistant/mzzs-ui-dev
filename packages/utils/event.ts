@@ -6,9 +6,9 @@ const isSafari = (userAgent.indexOf('Chrome') === -1) && (userAgent.indexOf('Saf
  * 监听事件
  * @param {Element|Document|Window} el 
  * @param {String} event 
- * @param {Function} handler 
+ * @param {any} handler 
  */
- export function on(el: Element|Document|Window, event: string, handler: (e: Event) => void) {
+ export function on(el: Element|Document|Window, event: string, handler: any) {
     if (document.addEventListener !== undefined) {
         el.addEventListener(event, handler, false)
         // @ts-ignore
@@ -25,9 +25,9 @@ const isSafari = (userAgent.indexOf('Chrome') === -1) && (userAgent.indexOf('Saf
  * 取消事件监听
  * @param {Element|Document|Window} el 
  * @param {String} event 
- * @param {Function} handler 
+ * @param {any} handler 
  */
-export function off(el: Element|Document|Window, event: string, handler: (e: Event) => void) {
+export function off(el: Element|Document|Window, event: string, handler: any) {
     if (document.removeEventListener !== undefined) {
         el.removeEventListener(event, handler, false)
         // @ts-ignore

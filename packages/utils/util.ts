@@ -22,7 +22,6 @@ export function camelCase(name: string) {
     ).replace(/^moz([A-Z])/, 'Moz$1')
 }
 
-
 /**
  * 去除末尾非数字字符，并转换成浮点数
  * @param val 
@@ -31,3 +30,5 @@ export function camelCase(name: string) {
 export function transformNumber(val: string): number {
     return parseFloat(val.replace(/([^0-9\.]+)$/g, ''))
 }
+
+

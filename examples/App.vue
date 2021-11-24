@@ -3,6 +3,19 @@
         <h5>collapse 测试</h5>
 
         <p>基础用法</p>
+        <div class="demo-scroll2">
+            <mzzs-scroll height="300px">
+                <ul>
+                    <li v-for="i in 100" :key="i">这是一个数量额 - {{ i }}</li>
+                </ul>
+            </mzzs-scroll>
+        </div>
+    </div>
+
+    <div class="test">
+        <h5>collapse 测试</h5>
+
+        <p>基础用法</p>
         <div class="demo-collapse">
             <mzzs-collapse v-model="activeNames" @change="handleChange">
                 <mzzs-collapse-item title="Consistency" name="1">
@@ -52,6 +65,7 @@
             </mzzs-collapse>
         </div>
     </div>
+
     <div class="test">
         <h5>popover 测试</h5>
 
@@ -67,6 +81,7 @@
             </mzzs-popover>
         </div>
     </div>
+
     <div class="test">
         <h5>color 测试</h5>
 
@@ -455,5 +470,9 @@ html, body {
     width: 500px;
     margin: 0 auto;
     border: 10px solid #dddddd;
+}
+.demo-scroll2 {
+    margin: 0 auto;
+    width: 500px;
 }
 </style>

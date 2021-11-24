@@ -17,6 +17,7 @@ import ColorPicker from './color-picker'
 import Popover from './popover'
 import Collapse from './collapse'
 import CollapseItem from './collapse-item'
+import Scroll from './scroll'
 
 const components = [
     Row,
@@ -36,7 +37,8 @@ const components = [
     ColorPicker,
     Popover,
     Collapse,
-    CollapseItem
+    CollapseItem,
+    Scroll,
 ]
 
 
